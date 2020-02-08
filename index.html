@@ -9,23 +9,32 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>BeerBase</title>
+    <title>CocktailDemand</title>
   </head>
   <body>
     <div class="container">
-      <h1>Welcome To BeerBase</h1>
+      <h1>Welcome To CocktailDemand</h1>
       <div class="flex">
         <form class="flex" id="submit">
-          <input type="text" id="search" placeholder="Search by beer name" />
+          <input
+            type="text"
+            id="search"
+            placeholder="Search by cocktail name"
+          />
           <button class="search-btn" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </form>
-        <button class="random-btn" id="random">
+        <button class="random-btn" id="random" title="Random Cocktail">
           <i class="fas fa-random"></i>
         </button>
       </div>
+      <small class="error-message" id="error-message"
+        >Please enter all or part of cocktail name!</small
+      >
       <div id="result-heading"></div>
+      <div id="cocktails" class="cocktails"></div>
+      <div id="cocktail-element"></div>
     </div>
     <script src="script.js"></script>
   </body>
