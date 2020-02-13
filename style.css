@@ -107,6 +107,48 @@ input[type="text"] {
   opacity: 1;
 }
 
+.single-cocktail {
+  margin: 30px auto;
+  width: 70%;
+}
+
+.single-cocktail img {
+  width: 300px;
+  margin: 15px;
+  border: 4px #fff solid;
+  border-radius: 2px;
+}
+
+.single-cocktail-info {
+  margin: 20px;
+  padding: 10px;
+  border: 2px #e09850 dashed;
+  border-radius: 5px;
+}
+
+.single-cocktail p {
+  margin: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.5s;
+}
+
+.single-cocktail ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.single-cocktail ul li {
+  border: 1px solid #ededed;
+  border-radius: 5px;
+  background-color: #fff;
+  display: inline-block;
+  color: #2d2013;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 0 5px 5px 0;
+}
+
 @media (max-width: 800px) {
   .cocktails {
     grid-template-columns: repeat(3, 1fr);

@@ -83,9 +83,9 @@ function addCocktailToDOM(cocktail) {
   }
 
   singleCocktail.innerHTML = `
-    <div class="single cocktail">
+    <div class="single-cocktail">
       <h1>${cocktail.strDrink}</h1>
-      <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}/>
+      <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}"/>
       <div class="single-cocktail-info">
         ${cocktail.strGlass ? `<p>Glass Type: ${cocktail.strGlass}</p>` : ""}
       </div>
