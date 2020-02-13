@@ -10,7 +10,7 @@ const errorMessage = document.getElementById("error-message");
 // Generate HTML for cocktail
 function searchForCocktail(e) {
   e.preventDefault();
-
+  singleCocktail.innerHTML = "";
   const searchValue = search.value;
 
   if (searchValue.trim()) {
@@ -60,6 +60,9 @@ function getCocktailbyID(cocktailID) {
 }
 
 function getRandomCocktail() {
+  cocktailElement.innerHTML = "";
+  resultHeading.innerHTML = "";
+
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(res => res.json())
     .then(data => {
