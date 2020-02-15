@@ -5,7 +5,7 @@ const cocktailElement = document.getElementById("cocktails");
 const singleCocktail = document.getElementById("cocktail-element");
 const resultHeading = document.getElementById("result-heading");
 const errorMessage = document.getElementById("error-message");
-const vodkaButton = document.getElementById("vodka-button");
+const alcButtons = document.getElementsByClassName("alc-button");
 
 // Search for cocktail based on user keyword
 // Generate HTML for cocktail
@@ -104,8 +104,29 @@ function addCocktailToDOM(cocktail) {
   `;
 }
 
-function displayVodkaDrinks() {
-  fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka`)
+function buttonClicked(clicked) {
+  let alcoholType = "";
+  switch (clicked) {
+    case "vodka-button":
+      alcoholType = "Vodka";
+      break;
+    case "gin-button":
+      alcoholType = "Gin";
+      break;
+    case "whiskey-button":
+      alcoholType = "Whiskey";
+      break;
+    case "rum-button":
+      alcoholType = "Rum";
+      break;
+    case "tequila-button":
+      alcoholType = "Tequila";
+      break;
+  }
+  singleCocktail.innerHTML = "";
+  fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${alcoholType}`
+  )
     .then(res => res.json())
     .then(data => {
       cocktailElement.innerHTML = data.drinks
@@ -127,8 +148,6 @@ function displayVodkaDrinks() {
 submit.addEventListener("submit", searchForCocktail);
 
 random.addEventListener("click", getRandomCocktail);
-
-vodkaButton.addEventListener("click", displayVodkaDrinks);
 
 cocktailElement.addEventListener("click", e => {
   const cocktailInfo = e.path.find(item => {
