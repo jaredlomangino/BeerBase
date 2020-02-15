@@ -5,6 +5,7 @@ const cocktailElement = document.getElementById("cocktails");
 const singleCocktail = document.getElementById("cocktail-element");
 const resultHeading = document.getElementById("result-heading");
 const errorMessage = document.getElementById("error-message");
+const vodkaButton = document.getElementById("vodka-button");
 
 // Search for cocktail based on user keyword
 // Generate HTML for cocktail
@@ -103,9 +104,31 @@ function addCocktailToDOM(cocktail) {
   `;
 }
 
+function displayVodkaDrinks() {
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka`)
+    .then(res => res.json())
+    .then(data => {
+      cocktailElement.innerHTML = data.drinks
+        .map(
+          cocktail =>
+            `
+                <div class="cocktail">
+                    <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}"/>
+                    <div class="cocktail-info" data-cocktailID="${cocktail.idDrink}">
+                        <h3>${cocktail.strDrink}</h3>
+                    </div>
+                </div>
+                `
+        )
+        .join("");
+    });
+}
+
 submit.addEventListener("submit", searchForCocktail);
 
 random.addEventListener("click", getRandomCocktail);
+
+vodkaButton.addEventListener("click", displayVodkaDrinks);
 
 cocktailElement.addEventListener("click", e => {
   const cocktailInfo = e.path.find(item => {

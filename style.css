@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #035394;
+  background: #466365;
   color: #fff;
   font-family: "Noto Sans KR", sans-serif;
   margin: 0;
@@ -85,7 +85,7 @@ input[type="text"] {
 .cocktail img {
   width: 100%;
   height: 100%;
-  border: 4px #fff solid;
+  border: 4px #b49a67 solid;
   border-radius: 2px;
 }
 
@@ -115,7 +115,7 @@ input[type="text"] {
 .single-cocktail img {
   width: 300px;
   margin: 15px;
-  border: 4px #fff solid;
+  border: 4px #b49a67 solid;
   border-radius: 2px;
 }
 
@@ -147,6 +147,13 @@ input[type="text"] {
   font-weight: bold;
   padding: 5px;
   margin: 0 5px 5px 0;
+}
+
+.alcohol-buttons button {
+  cursor: pointer;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-right: 5px;
 }
 
 @media (max-width: 800px) {
