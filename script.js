@@ -1,11 +1,13 @@
 const submit = document.getElementById("submit");
 const search = document.getElementById("search");
 const random = document.getElementById("random");
+const quiz = document.getElementById("quiz");
 const cocktailElement = document.getElementById("cocktails");
 const singleCocktail = document.getElementById("cocktail-element");
 const resultHeading = document.getElementById("result-heading");
 const errorMessage = document.getElementById("error-message");
 const alcButtons = document.getElementsByClassName("alc-button");
+const quizButton = document.getElementById("quiz-btn");
 
 // Search for cocktail based on user keyword
 // Generate HTML for cocktail
@@ -46,6 +48,19 @@ function searchForCocktail(e) {
   } else {
     errorMessage.className = "error-message-display";
   }
+}
+
+function getCocktailIngredients(cocktail) {
+  const ingredients = [];
+
+  for (let i = 1; i <= 20; i++) {
+    if (cocktail[`strIngredient${i}`]) {
+      ingredients.push(`${cocktail[`strIngredient${i}`]}`);
+    } else {
+      break;
+    }
+  }
+  return ingredients;
 }
 
 function getCocktailbyID(cocktailID) {
@@ -102,6 +117,10 @@ function addCocktailToDOM(cocktail) {
       </div>
     </div>
   `;
+
+  singleCocktail.scrollIntoView({
+    behavior: "smooth"
+  });
 }
 
 function buttonClicked(clicked) {
@@ -124,6 +143,7 @@ function buttonClicked(clicked) {
       break;
   }
   singleCocktail.innerHTML = "";
+
   fetch(
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${alcoholType}`
   )
@@ -145,9 +165,52 @@ function buttonClicked(clicked) {
     });
 }
 
+function addQuizToDOM(cocktail) {
+  ingredients = getCocktailIngredients(cocktail);
+
+  singleCocktail.innerHTML = `
+    <div class="single-cocktail-quiz">
+      <h1>${cocktail.strDrink}</h1>
+      <img src="${cocktail.strDrinkThumb}" alt="${cocktail.strDrink}"/>
+      <p>List all ${ingredients.length} ingredients in a ${cocktail.strDrink}</p>
+      <div class="quiz-form">
+      <form class="quiz-form">
+      <input
+        type="text"
+        id="search"
+        placeholder="Enter an ingredient"
+      />
+        <button class="quiz-btn" type="submit" id="quiz-btn">
+          <i class="far fa-check-circle"></i>
+        </button>
+      </div>
+    </div>
+  `;
+  quizButton.addEventListener("click", e => {
+    console.log(ingredients);
+  });
+  //console.log(ingredients);
+}
+
+function startRandomQuiz() {
+  singleCocktail.innerHTML = "";
+  cocktailElement.innerHTML = "";
+  resultHeading.innerHTML = "";
+
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+    .then(res => res.json())
+    .then(data => {
+      const cocktail = data.drinks[0];
+
+      addQuizToDOM(cocktail);
+    });
+}
+
 submit.addEventListener("submit", searchForCocktail);
 
 random.addEventListener("click", getRandomCocktail);
+
+quiz.addEventListener("click", startRandomQuiz);
 
 cocktailElement.addEventListener("click", e => {
   const cocktailInfo = e.path.find(item => {
