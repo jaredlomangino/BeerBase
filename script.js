@@ -7,7 +7,6 @@ const singleCocktail = document.getElementById("cocktail-element");
 const resultHeading = document.getElementById("result-heading");
 const errorMessage = document.getElementById("error-message");
 const alcButtons = document.getElementsByClassName("alc-button");
-const quizButton = document.getElementById("quiz-btn");
 
 // Search for cocktail based on user keyword
 // Generate HTML for cocktail
@@ -177,7 +176,7 @@ function addQuizToDOM(cocktail) {
       <form class="quiz-form">
       <input
         type="text"
-        id="search"
+        id="quiz-search"
         placeholder="Enter an ingredient"
       />
         <button class="quiz-btn" type="submit" id="quiz-btn">
@@ -186,10 +185,22 @@ function addQuizToDOM(cocktail) {
       </div>
     </div>
   `;
+  console.log(ingredients);
+  const quizButton = document.getElementById("quiz-btn");
+  const quizSearch = document.getElementById("quiz-search");
+
   quizButton.addEventListener("click", e => {
-    console.log(ingredients);
+    e.preventDefault();
+
+    for (let i = 0; i < ingredients.length; i++) {
+      if (quizSearch.value.trim() == ingredients[i]) {
+        let index = ingredients.indexOf(ingredients[i]);
+        ingredients.splice(index, 1);
+        quizSearch.value = "";
+        console.log(ingredients);
+      }
+    }
   });
-  //console.log(ingredients);
 }
 
 function startRandomQuiz() {
